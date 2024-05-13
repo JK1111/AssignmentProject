@@ -3,6 +3,7 @@ using Assignment.Domain.Constants;
 using Assignment.Infrastructure.Data;
 using Assignment.Infrastructure.Data.Interceptors;
 using Assignment.Infrastructure.Identity;
+using Assignment.Infrastructure.WeatherForecast;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
@@ -48,6 +49,8 @@ public static class DependencyInjection
 
         services.AddAuthorization(options =>
             options.AddPolicy(Policies.CanPurge, policy => policy.RequireRole(Roles.Administrator)));
+
+        services.AddTransient<IWeatherForecastApi, WeatherForecastApi>();
 
         return services;
     }
