@@ -103,5 +103,45 @@ public class ApplicationDbContextInitialiser
 
             await _context.SaveChangesAsync();
         }
+
+        if (!_context.Countries.Any())
+        {
+            _context.Countries.AddRange(new Country
+            {
+                Name = "Italy",
+                Cities =
+                {
+                    new City { Name = "Rome" },
+                    new City { Name = "Milano" },
+                    new City { Name = "Torino"},
+                    new City { Name = "Genova" },
+                    new City { Name = "Venezia" },
+                }
+            },
+            new Country
+            {
+                Name = "France",
+                Cities =
+                {
+                    new City { Name = "Paris" },
+                    new City { Name = "Marseille" },
+                    new City { Name = "Lyon"},
+                    new City { Name = "Bordeaux" },
+                }
+            },
+            new Country
+            {
+                Name = "Spain",
+                Cities =
+                {
+                    new City { Name = "Barcelona" },
+                    new City { Name = "Madrid" },
+                    new City { Name = "Seville"},
+                    new City { Name = "Valencia" },
+                }
+            });
+
+            await _context.SaveChangesAsync();
+        }
     }
 }
