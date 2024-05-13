@@ -43,6 +43,18 @@ internal class TodoManagmentViewModel : Screen
         {
             _selectedItem = value;
             NotifyOfPropertyChange(() => SelectedItem);
+            CalculateDoneState();
+        }
+    }
+
+    private bool _isDoneEnabled;
+    public bool IsDoneEnabled
+    {
+        get => _isDoneEnabled;
+        set
+        {
+            _isDoneEnabled = value;
+            NotifyOfPropertyChange(() => IsDoneEnabled);
         }
     }
 
@@ -78,6 +90,10 @@ internal class TodoManagmentViewModel : Screen
         }
     }
 
+    private void CalculateDoneState()
+    {
+        IsDoneEnabled = (SelectedItem?.Id != null && SelectedItem.Done != true);
+    }
     private async void AddTodoList(object obj)
     {
         var todoList = new TodoListViewModel(_sender);
